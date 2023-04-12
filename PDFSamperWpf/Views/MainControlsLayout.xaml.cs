@@ -12,15 +12,15 @@ using System.Windows.Media;
 
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using MahApps.Metro.Controls;
-namespace PDFStamperWpf
+
+namespace PDFStamperWpf.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainControlsLayout.xaml
     /// </summary>
-    public partial class MainWindow: Window
+    public partial class MainControlsLayout : UserControl
     {
-        public MainWindow()
+        public MainControlsLayout()
         {
             InitializeComponent();
         }
