@@ -23,6 +23,9 @@ namespace PDFStamperWpf
         public MainWindow()
         {
             InitializeComponent();
+            MyMainControls.Content = new Views.MainControlsLayout();
+             
+
         }
     }
 }

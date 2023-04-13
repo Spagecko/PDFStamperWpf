@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.IO;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -20,9 +20,20 @@ namespace PDFStamperWpf.Views
     /// </summary>
     public partial class MainControlsLayout : UserControl
     {
+        public ViewModels.MainControlsVM  mainControlsVM { get; set; }
         public MainControlsLayout()
         {
             InitializeComponent();
+            mainControlsVM = new ViewModels.MainControlsVM();
+            DataContext = mainControlsVM;
+        }
+
+        private void fileDropStackPanel_Drop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string fileName = System.IO.Path.GetFileName(files[0]);
+            mainControlsVM.Files.Add(System.IO.Path.GetFullPath(files[0])); 
+            fileNameLabel.Content = fileName;
         }
     }
 }

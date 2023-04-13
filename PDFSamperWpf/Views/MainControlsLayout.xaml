@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PDFStamperWpf.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:PDFStamperWpf.ViewModels"
              xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Height="auto" Width="auto ">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="5">
@@ -28,7 +30,32 @@
                 <Button Width="150" Grid.Column="3" >STAMP</Button>
 
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid Grid.Row="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="fileNameLabel" Grid.Row="0" HorizontalAlignment="Center" FontSize="16"/>
+
+                    <StackPanel x:Name="fileDropStackPanel" Grid.Row="1" AllowDrop="True" Background="LightGray" Margin="40,0,40,0" Drop="fileDropStackPanel_Drop">
+                        <Label Content="Drop files here" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+                <!--<Border Name="dropZone" BorderBrush="Black" BorderThickness="2" Background="LightGray" CornerRadius="5" Margin="10" AllowDrop="True" Height="200">
+             
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Drop">
+                            <i:InvokeCommandAction Command="{Binding FileDroppedCommand}" CommandParameter="{Binding Path=EventArgs}"/>
+
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Border>-->
+
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <cefSharp:ChromiumWebBrowser x:Name="MyChromiumWebBrowser" Address="https://www.example.com" />
 
             </Grid>

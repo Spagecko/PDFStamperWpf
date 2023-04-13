@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1200">
     <Grid>
-        <ContentControl Width="auto"  Name = "MyMainControls" />
+        <ContentControl  Height="850" Width="1200"  Name = "MyMainControls" />
     </Grid>
 </Window>
