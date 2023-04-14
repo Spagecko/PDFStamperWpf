@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PDFStamperWpf.Models;
 
 namespace PDFStamperWpf.Views
 {
@@ -32,8 +33,16 @@ namespace PDFStamperWpf.Views
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             string fileName = System.IO.Path.GetFileName(files[0]);
-            mainControlsVM.Files.Add(System.IO.Path.GetFullPath(files[0])); 
-            fileNameLabel.Content = fileName;
+            byte[] ReadFileContent = File.ReadAllBytes(files[0]);
+            MyFileDataDisplay myFileDataDisplay = new MyFileDataDisplay(System.IO.Path.GetFullPath(files[0]));
+            //mainControlsVM.fileInMemoray.Add(ReadFileContent);'
+            mainControlsVM.FileDataList.Add(myFileDataDisplay);
+
+
+                //mainControlsVM.Files.Add(System.IO.Path.GetFullPath(files[0]));
+
+
+            //fileNameLabel.Content = fileName;
         }
     }
 }

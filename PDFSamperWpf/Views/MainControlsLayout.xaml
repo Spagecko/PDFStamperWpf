@@ -6,59 +6,59 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:PDFStamperWpf.ViewModels"
              xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-             mc:Ignorable="d" 
-             Height="auto" Width="auto ">
-    <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+             mc:Ignorable="d">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-                <Button Width="150" Grid.Column="0" Command="{Binding OpenFileDialogCommand }">Select Files</Button>
-
-                <TextBox Width="150" Grid.Column="1"></TextBox>
-                <DatePicker Width="300" Grid.Column="2"></DatePicker>
-                <Button Width="150" Grid.Column="3" >STAMP</Button>
-
-            </Grid>
-            <Grid Grid.Row="1">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Label x:Name="fileNameLabel" Grid.Row="0" HorizontalAlignment="Center" FontSize="16"/>
-
-                    <StackPanel x:Name="fileDropStackPanel" Grid.Row="1" AllowDrop="True" Background="LightGray" Margin="40,0,40,0" Drop="fileDropStackPanel_Drop">
-                        <Label Content="Drop files here" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
-                <!--<Border Name="dropZone" BorderBrush="Black" BorderThickness="2" Background="LightGray" CornerRadius="5" Margin="10" AllowDrop="True" Height="200">
-             
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Drop">
-                            <i:InvokeCommandAction Command="{Binding FileDroppedCommand}" CommandParameter="{Binding Path=EventArgs}"/>
-
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Border>-->
-
-            </Grid>
-            <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <cefSharp:ChromiumWebBrowser x:Name="MyChromiumWebBrowser" Address="https://www.example.com" />
-
-            </Grid>
+            <Button Width="150" Grid.Column="0" Command="{Binding OpenFileDialogCommand }">Select Files</Button>
+            <TextBox Width="150" Grid.Column="1" Margin="5,0,5,0"></TextBox>
+            <DatePicker Width="300" Grid.Column="2" Margin="5,0,5,0"></DatePicker>
+            <Button Width="150" Grid.Column="3" Margin="5,0,0,0">STAMP</Button>
         </Grid>
-    </Grid>
+
+        <Grid DockPanel.Dock="Left">
+            <ScrollViewer  MinWidth="300" Width="auto" MaxWidth="600">
+                <StackPanel x:Name="fileDropStackPanel" AllowDrop="True" Background="LightGray" Drop="fileDropStackPanel_Drop">
+                    <Label Content="Drop files here" HorizontalAlignment="Center"/>
+                    <ListBox x:Name="fileDataListBox"
+         ItemsSource="{Binding FileDataList}"
+         Margin="5"
+         Grid.Column="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0"
+                        Content="Remove"
+                        Command="{Binding DataContext.RemoveFileCommand, ElementName=fileDataListBox}"
+                        CommandParameter="{Binding}"
+                        Margin="5"/>
+                                    <TextBlock Grid.Column="1"
+                           Text="{Binding FileName}"
+                           VerticalAlignment="Center"/>
+
+                         
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid>
+            <cefSharp:ChromiumWebBrowser x:Name="MyChromiumWebBrowser" Address="https://www.example.com" />
+        </Grid>
+    </DockPanel>
 </UserControl>
+
