@@ -67,7 +67,7 @@
 
                 <Grid DockPanel.Dock="Left">
                     <ScrollViewer MinWidth="300" Width="auto" MaxWidth="600">
-                        <StackPanel x:Name="fileDropStackPanel" AllowDrop="True" Background="LightGray" Drop="fileDropStackPanel_Drop">
+                        <StackPanel x:Name="fileDropStackPanel" AllowDrop="True" Background="  " Drop="fileDropStackPanel_Drop">
                             <Label Content="Drop files here" HorizontalAlignment="Center"/>
                             <ListBox x:Name="fileDataListBox"
                                      ItemsSource="{Binding FileDataList}"
